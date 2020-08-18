@@ -1,12 +1,21 @@
 class Card
-  attr_reader :suit, :value
+  attr_reader :suit, :card, :points
 
-  def initialize(suit, value)
+  def initialize(suit, card)
     @suit = suit
-    @value = value
+    @card = card
+    @points = points
   end
 
-  def to_s
-    "#{@value} -> #{@suit}  "
+  def show
+    "#{@card} -> #{@suit}"
+  end
+
+  private
+
+  def points
+    return 11 if @card == "A"
+    return 10 if ["J", "Q", "K"].include?(@card)
+    @card
   end
 end
