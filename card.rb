@@ -4,7 +4,7 @@ class Card
   def initialize(suit, card)
     @suit = suit
     @card = card
-    @points = points
+    @points = card_points
   end
 
   def show
@@ -13,7 +13,7 @@ class Card
 
   private
 
-  def points
+  def card_points
     return 11 if @card == "A"
     return 10 if ["J", "Q", "K"].include?(@card)
     @card
