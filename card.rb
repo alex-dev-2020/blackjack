@@ -1,21 +1,39 @@
 class Card
-  attr_reader :suit, :card, :points
+  attr_reader :value
 
-  def initialize(suit, card)
+  VALUES = {
+      '2'  => 2,
+      '3'  => 3,
+      '4'  => 4,
+      '5'  => 5,
+      '6'  => 6,
+      '7'  => 7,
+      '8'  => 8,
+      '9'  => 9,
+      '10' => 10,
+      'В'  => 10,
+      'Д'  => 10,
+      'К'  => 10,
+      'Т'  => 11,
+  }
+
+  SUITS = {
+      spades:  '♠',
+      clubs:   '♣',
+      diamond: '♦',
+      heart:   '♥'
+  }
+
+  def initialize(value, suit)
+    @value = value
     @suit = suit
-    @card = card
-    @points = card_points
   end
 
-  def show
-    "#{@card} -> #{@suit}"
+  def score
+    VALUES[@value]
   end
 
-  private
-
-  def card_points
-    return 11 if @card == "A"
-    return 10 if ["J", "Q", "K"].include?(@card)
-    @card
+  def inspect
+    @value + SUITS[@suit]
   end
 end
