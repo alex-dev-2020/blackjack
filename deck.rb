@@ -1,25 +1,28 @@
-require_relative "card"
+require_relative 'card'
 
 class Deck
-  attr_reader :cards
+  attr_reader :deck
 
   def initialize
-    @cards = create_deck
-  end
-
-  protected
-
-  def create_deck
-    cards = []
-    %w(♠ ♣ ♥ ♦).each do |suit|
-      (2..10).each do |number|
-        cards << Card.new(suit, number)
-      end
-
-      %w(A K Q J).each do |facecard|
-        cards << Card.new(suit, facecard)
+    @deck = []
+    Card::VALUES.each_key do |value|
+      Card::SUITS.each_key do |suit|
+        @deck << Card.new(value, suit)
       end
     end
-    cards.shuffle!
+  end
+
+  def take
+    @deck.delete(@deck.sample)
+  end
+
+  def inspect
+    inspect = ''
+    @deck.each.with_index(1) do |card, i|
+      inspect += card.inspect + '  '
+      inspect += ' ' if card.value != '10'
+      inspect += "\n" if i % 4 == 0
+    end
+    inspect
   end
 end
